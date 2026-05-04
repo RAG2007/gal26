@@ -1,0 +1,165 @@
+% =============================================================================
+%  lecture.tex -- lecture notes / skrypt template
+%  Compile with: latexmk lecture.tex   (uses lualatex via .latexmkrc)
+% =============================================================================
+\documentclass[11pt, a4paper]{article}
+\usepackage{mypreamble}
+
+% --- Document metadata ---
+\newcommand{\coursename}{GAL26}
+\newcommand{\notetaker}{Radosław Galiński}
+\newcommand{\semester}{Semestr letni 2025/26}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\itshape\coursename}
+\fancyhead[R]{\itshape\nouppercase\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\thispagestyle{empty}
+\lectureheader{\coursename}{\notetaker}{\semester}
+
+\tableofcontents
+\bigskip
+\newpage
+
+% =============================================================================
+\section{Wprowadzenie}
+% use gq in vim to style
+
+To są moje notatki z GAL'u z semetru letniego 25/26 na drugie kolokwium. Jeśli
+nie ma czegoś lub jest słabo opisane to proszę nie krępować się poprawić.
+
+\section{Iloczyn skalarny i ortogonalność}
+\begin{definition}
+    Formę dwuliniową \(\langle, \rangle\) nazywamy iloczynem skalarnym jeżeli:
+    \begin{enumerate}
+    \item Jest symetryczna;
+    \item Jest dodatnio określona.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Definiujemy długość (normę) wektora \(\alpha\) jako liczbę
+    \[ \norm{\alpha} = \sqrt{ \ip{\alpha}{\alpha} } \]
+\end{definition}
+
+\begin{lemma}[Podstawowe własności normy]
+    Zachodzą następujące własności:
+    \begin{enumerate}
+        \item \( \norm{\alpha + \beta}^2 = \norm{\alpha}^2 + \norm{\beta}^2 + 2 \ip{\alpha}{\beta} \);
+        \item \( \norm{a \cdot \alpha } = a \norm{\alpha}\);
+        \item \( \norm{ \alpha } = 0 \Longleftrightarrow \alpha = 0 \).
+    \end{enumerate}
+\end{lemma}
+\begin{lemma}[Uogólnienia nierówności szkolnych]
+    Dla iloczynu skalarnego \(\ip{}{}\) prawdziwe są nierówności:
+    \begin{enumerate}
+        \item Nierówność Schwarza --- \(\abs{\ip{\alpha}{\beta}} \leq
+        \norm{\alpha} \cdot \norm{\beta}\);
+        \item Nierówność trójkąta --- \(\norm{\alpha + \beta} \leq \norm{\alpha}
+        + \norm{\beta}\);
+        \item Nierówność Pitagorasa --- \(\ip{\alpha}{\beta} = 0 \Longrightarrow
+        \norm{\alpha + \beta} \leq \norm{\alpha} + \norm{\beta}\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{definition}
+    Kątem między wektorami \(\alpha, \beta\) nazwiemy liczbę \(\theta\) taką, że:
+    \[\text{cos}\theta = \frac{\ip{\alpha}{\beta}}{\norm{\alpha}\norm{\beta}}.\]
+\end{definition}
+\newpage
+\begin{definition}
+	Dla formy dwuliniowej \(f\) na \(V\) mówimy, że wektory \(\alpha, \beta\) są
+	prostopadłe, gdy zachodzi \(f(\alpha, \beta) = 0\) i oznaczamy wtedy \(\alpha \perp \beta\).
+	Definiujemy również dopełnienie ortogonalne podprzestrzeni \(W \subseteq V\)
+	jako \[W^{\perp} = \{v \in V : \forall_{w \in W}\ v \perp w\}\]
+\end{definition}
+
+\begin{definition}
+    Układ \((\alpha_1, ..., \alpha_n)\) wektorów nazwiemy ortogonalnym, jeśli każdej
+    pary różnych \(i, j\) jest \(\alpha_i \perp \alpha_j\).
+    Bazą ortagonalną nazwiemy układ który jest bazą i jest ortogonalny.
+\end{definition}
+
+\begin{remark}
+    Zachodzą własności:
+    \begin{enumerate}
+        \item Jeśli \(X \subseteq V\) to ortogonalny układ niezerowych wektorów
+        przestrzeni \(V\) z iloczynem skalarnym. Wówczas układ \(X\) jest
+        liniowo niezależny.
+
+        \item Każda przestrzeń euklidesowa ma bazę prostopadłą.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+	Mówimy, że układ jest ortonormalny, jeżeli jest ortogonalny
+	oraz wszystkie jego wektory mają normę 1.
+\end{definition}
+
+\begin{remark}
+    Prawdziwy jest następujący rozkład, gdzie pierwszy wyraz należy do
+    \(\text{lin}(\alpha)\), a drugi do \(\text{lin}(\alpha)^{\perp}\):
+    \[
+    \beta = \frac{\ip{\alpha}{\beta}}{\ip{\alpha}{\alpha}}\alpha + \left( \beta - \frac{\ip{\alpha}{\beta}}{\ip{\alpha}{\alpha} \alpha} \right)
+    \]
+\end{remark}
+
+\begin{remark}
+    Niech \(V\) to \(n\)-wymiarowa przestrzeń liniowa z iloczynem skalarnym. Dla podprzestrzeni \(W \subseteq V\) zachodzi:
+    \begin{enumerate}
+        \item \(V = W \oplus W^{\perp}\);
+        \item \(\text{dim}(W) + \text{dim}(W^{\perp}) = n\).
+        \item \((W^{\perp})^{\perp} = W\)
+    \end{enumerate}
+\end{remark}
+
+\begin{remark}
+    Niech \(\mathcal{A} = (\alpha_1, ..., \alpha_n)\) to baza ortogonalna \(V\).
+    Wówczas dla każdego wektora \(a_1 \alpha_1 + ... + a_n \alpha_n = \alpha \in
+    V\) zachodzi
+    \[
+    a_1 = \frac{\ip{\alpha}{\alpha_1}}{\ip{\alpha_1}{\alpha_1}}, ..., a_n =
+    \frac{\ip{\alpha}{\alpha_n}}{\ip{\alpha_n}{\alpha_n}}
+    \]
+\end{remark}
+
+
+\begin{definition}
+	Niech \(V\) to przestrzeń euklidesowa z podprzestrzenią \(W\). Wówczas:
+	\begin{enumerate}
+	    \item przekształczenie liniowe \(\phi: V \to V\) będące rzutem na \(W\)
+			wzdłuż \(W^{\perp}\) nazywamy rzutem prostopadłym na \(W\).
+		\item przekształcenie liniowe \(\psi: V \to V\) będące symetrią względem
+		\(W\) wzdłuż \(W^{\perp}\) nazywamy symetrią prostopadłą względem \(W\).
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Ortogonalizacja Grama-Smidta]
+    Jesli \(V\) jest przestrzenią euklidesową oraz \((\gamma_1, ..., \gamma_n)\)
+    jest bazą przestrzeni \(V\), to układ \((\alpha_1, ..., \alpha_n)\) zadany
+    rekurencyjnie przez \(\alpha_1 = \gamma_1\) oraz dla \(k > 1\)
+    \[
+        \alpha_k = \gamma_k - \sum_{i = 1}^{k - 1}
+        \frac{\ip{\gamma_k}{\alpha_i}}{\ip{\alpha_i}{\alpha_i}}
+    \]
+    jest bazą ortogonalną \(V\). Ponadto dla każdego \(k\) mamy
+    \(\textnormal{lin}(\alpha_1, ..., \alpha_k) = \textnormal{lin}(\gamma_1, ..., \gamma_k)\).
+\end{theorem}
+
+\begin{remark}
+    Z powyższego twierdzenia wynika kilka rzeczy:
+    \begin{enumerate}
+        \item Każdy układ ortogonalny mozna dopełnić do bazy ortogonalnej.
+        \item Jeśli \(\phi \in \text{End}(V)\) jest triangularyzowalny, to
+        istnieje też taka baza ortogonalna \(\mathcal{A}\) w której macierz
+        \(\text{M}(\phi)_{\mathcal{A}}^{\mathcal{A}}\) jest górnotrójkątna.
+    \end{enumerate}
+\end{remark}
+
+
+\end{document}

@@ -1,0 +1,244 @@
+% =============================================================================
+%  mypreamble.sty -- shared preamble for lecture notes and homework
+%  Designed for LuaLaTeX (recommended) but compatible with pdfLaTeX.
+% =============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mypreamble}[2026/05/04 Personal LaTeX preamble]
+
+% --------------------------- Engine / encoding -------------------------------
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+\else
+  \usepackage{fontspec}
+  \setmainfont{Latin Modern Roman}
+  % Alternatives worth trying:
+  %   \setmainfont{TeX Gyre Pagella}     % Palatino-like, great for math
+  %   \setmainfont{EB Garamond}          % elegant, formal
+  %   \setmainfont{STIX Two Text}        % modern, has matching math font
+\fi
+
+% --------------------------- Language ----------------------------------------
+\usepackage[polish]{babel}
+
+% --------------------------- Math --------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}            % amsmath++
+
+% --------------------------- Typography --------------------------------------
+\usepackage{microtype}            % subtle perfection
+\usepackage{booktabs}             % proper tables (no vertical rules!)
+\usepackage{siunitx}              % numbers and units
+\usepackage{enumitem}             % control list spacing/labels
+\usepackage{xcolor}
+
+% --------------------------- Layout ------------------------------------------
+\usepackage[a4paper, margin=2.5cm, headheight=14pt]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}             % cleaner section headings
+\linespread{1.05}
+
+% --------------------------- Boxes -------------------------------------------
+\usepackage{mdframed}
+
+% --------------------------- Colors ------------------------------------------
+\definecolor{accent}{HTML}{1F4E79}    % muted academic blue
+\definecolor{accent2}{HTML}{8B6F47}   % warm complement
+\definecolor{rule}{HTML}{B0B0B0}
+
+% --------------------------- Section heading style ---------------------------
+\titleformat{\section}
+  {\Large\bfseries\color{accent}}{\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{accent!85!black}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+
+% --------------------------- Hyperlinks (load late) --------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  citecolor=accent,
+  pdfborder={0 0 0}
+}
+\usepackage{cleveref}             % must come after hyperref
+
+% --------------------------- Theorem boxes -----------------------------------
+\mdfdefinestyle{thmstyle}{
+  linewidth=0.5pt,
+  linecolor=accent,
+  roundcorner=4pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  backgroundcolor=white,
+  skipabove=10pt,
+  skipbelow=10pt,
+}
+\mdfdefinestyle{defstyle}{
+  linewidth=0.5pt,
+  linecolor=accent2,
+  roundcorner=4pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  backgroundcolor=white,
+  skipabove=10pt,
+  skipbelow=10pt,
+}
+
+% Plain style: bold header, italic body -- for math statements
+\theoremstyle{plain}
+\newmdtheoremenv[style=thmstyle]{theorem}{Twierdzenie}[section]
+\newmdtheoremenv[style=thmstyle]{lemma}[theorem]{Lemat}
+\newmdtheoremenv[style=thmstyle]{proposition}[theorem]{Stwierdzenie}
+\newmdtheoremenv[style=thmstyle]{corollary}[theorem]{Wniosek}
+
+% Definition style: bold header, upright body
+\theoremstyle{definition}
+\newmdtheoremenv[style=defstyle]{definition}{Definicja}[section]
+\newmdtheoremenv[style=defstyle]{example}[definition]{Przykład}
+
+% Remark style: italic header, upright body, no box
+\theoremstyle{remark}
+\newtheorem*{remark}{Uwaga}
+
+% Polish proof name + nicer QED symbol
+\renewcommand{\proofname}{Dowód}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Cleveref names in Polish
+\crefname{theorem}{twierdzenie}{twierdzenia}
+\Crefname{theorem}{Twierdzenie}{Twierdzenia}
+\crefname{lemma}{lemat}{lematy}
+\Crefname{lemma}{Lemat}{Lematy}
+\crefname{proposition}{stwierdzenie}{stwierdzenia}
+\Crefname{proposition}{Stwierdzenie}{Stwierdzenia}
+\crefname{corollary}{wniosek}{wnioski}
+\Crefname{corollary}{Wniosek}{Wnioski}
+\crefname{definition}{definicja}{definicje}
+\Crefname{definition}{Definicja}{Definicje}
+\crefname{example}{przykład}{przykłady}
+\Crefname{example}{Przykład}{Przykłady}
+\crefname{equation}{równanie}{równania}
+\Crefname{equation}{Równanie}{Równania}
+
+% =============================================================================
+%  Math macros
+% =============================================================================
+
+% --- Number sets ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+% --- Probability ---
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}        % \P is taken by LaTeX (pilcrow)
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+
+% --- Linear algebra / operators ---
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% --- Paired delimiters (auto-sizing with starred form) ---
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+% Two-arg inner product: \ip{u}{v} -> <u, v>, with starred form \ip*{u}{v}
+\DeclarePairedDelimiterX{\ip}[2]{\langle}{\rangle}{#1,\, #2}
+
+% --- Common shorthands ---
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}          % nicer phi
+\newcommand{\dd}{\mathrm{d}}          % upright differential: \int f\,\dd x
+\newcommand{\eqdef}{\coloneqq}        % :=
+\newcommand{\defeq}{\eqqcolon}        % =:
+\newcommand{\To}{\longrightarrow}
+\newcommand{\toas}{\xrightarrow{\text{a.s.}}}
+\newcommand{\toP}{\xrightarrow{\Prob}}
+
+% =============================================================================
+%  Title block helpers
+% =============================================================================
+
+% Lecture-notes style: centered block with rule, suitable for top of doc
+% Usage: \lectureheader{Course title}{Lecturer}{Note-taker}{Semester}
+\newcommand{\lectureheader}[4]{%
+  \begin{center}
+    {\Huge\bfseries\color{accent} #1}\\[0.6em]
+    {\large\itshape #2}\\[0.3em]
+    {\normalsize notatki: #3 \quad\textperiodcentered\quad #4}
+  \end{center}
+  \vspace{0.2em}
+  {\color{rule}\hrule height 0.6pt}
+  \vspace{1.5em}
+}
+
+% Homework style: compact top-of-page banner
+% Usage: \homeworkheader{Course}{Set title}{Author}
+\newcommand{\homeworkheader}[3]{%
+  \noindent
+  \begin{minipage}[t]{0.6\textwidth}
+    {\large\bfseries\color{accent} #2}\\[0.2em]
+    {\small\itshape #1}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.35\textwidth}
+    \raggedleft
+    {\large #3}\\[0.2em]
+    {\small\itshape \today}
+  \end{minipage}
+  \par\vspace{0.4em}
+  {\color{rule}\hrule height 0.4pt}
+  \vspace{1.2em}
+}
+
+% =============================================================================
+%  Homework structure
+% =============================================================================
+
+% \problem{statement}        -- numbered problem
+% \problem[hard]{statement}  -- with optional difficulty/tag annotation
+\newcounter{problem}
+\newcommand{\problem}[2][]{%
+  \refstepcounter{problem}%
+  \medskip
+  \noindent\textbf{\large\color{accent} Zadanie \theproblem.}%
+  \ifx\\#1\\\else\ \textit{(#1)}\fi\quad #2\par
+  \smallskip
+}
+
+% Solution environment
+\newenvironment{solution}{%
+  \par\noindent\textit{Rozwiązanie.}\par\smallskip
+  \begingroup
+}{%
+  \endgroup
+  \par\medskip
+}
+
+\endinput
