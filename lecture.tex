@@ -33,6 +33,119 @@
 To są moje notatki z GAL'u z semetru letniego 25/26 na drugie kolokwium. Jeśli
 nie ma czegoś lub jest słabo opisane to proszę nie krępować się poprawić.
 
+\section{Iloczyn tensorowy}
+
+\begin{definition}
+    Na iloczynie kartezjańskim \(V_1 \times ... \times V_n\) przestrzeni nad
+    \(K\) wprowadzamy strukturę przestrzeni liniowej definiując operacje:
+    \begin{enumerate}
+        \item \((v_1, ..., v_n) + (v_1', ..., v_n') = (v_1 + v_1', ..., v_n + v_n')\);
+        \item \(\lambda \cdot (v_1, ..., v_n) = (\lambda \cdot v_1, ..., \lambda \cdot v_n)\).
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Przekształcenie \(n\)-liniowe \(\phi\) definiujemy jako przekształcenie na iloczynie
+    kartezjańskim przestrzeni liniowych \(V_1 \times ... \times V_n\), tak że zachodzi:
+    \begin{enumerate}
+    \item \(\lambda \cdot \phi(v_1, ..., v_n) = \phi(v_1, ..., \lambda \cdot v_i, ..., v_n)\);
+    \item \(\phi(v_1, ..., v_n) + \phi(v_1, ..., v_{i-1}, v_i', v_{i + 1}, ...,
+    v_n) = \phi(v_1, ..., v_{i-1}, v_i + v_i', v_{i + 1}, ..., v_n)\).
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Niech \(V_1, ..., V_n\) będą przestrzeniami liniowymi nad \(K\). Wówczas definiujemy
+    iloczyn tensorowy \(T, \tau\) jako parę:
+    \begin{enumerate}
+        \item przestrzeni liniowej \(T\) oznaczanej przez \(V_1 \otimes ... \otimes V_n \),
+        \item przekształcenia \(n\)-liniowego \(\tau: V_1 \times ... \times V_n \to T\),
+    \end{enumerate}
+    taką, że dla dowolnego przekształcenia \(n\)-liniowego \(\phi\) istnieje
+    dokładnie jedno przekształcenie \(f\), że \(\phi = f \circ \tau\).
+\end{definition}
+
+\begin{theorem}
+	Iloczyn tensorowy \(V_1 \otimes... \otimes V_n\) jest wyznaczony z
+	dokładnością do izomorfizmu.
+\end{theorem}
+
+\begin{remark}
+	Jeśli \((\eps_1, ..., \eps_n) \subseteq U\) to układ liniowo niezależny, to jeśli dla
+	pewnego układu wektorów \((v_1, ..., v_n) \subseteq V\) mamy
+	\[
+	    \eps_1 \otimes v_1 + ... + \eps_n \otimes v_n = 0
+	\]
+	to \(v_1, ..., v_n = 0\)
+\end{remark}
+\begin{remark}
+	Niech \((\eps_1, ..., \eps_n) \subseteq U\) to układ liniowo niezależny.
+	Jeśli \((v_1, ..., v_n) \subseteq V\) spełnia warunek
+	\[
+	\eps_1 \otimes v_1 + ... + \eps_n \otimes v_n = z_1 \otimes w_1 + ... + z_n \otimes w_n
+	\]
+	dla pewnych \(z_i, w_i\), to dla każdego \(j\) zachodzi
+	\[
+	    v_i \in lin(w_1, ..., w_n)
+	\]
+\end{remark}
+
+\begin{theorem}
+	Niech \((\alpha_1, ..., \alpha_n) \subseteq V\) będzie bazą \(V\) oraz
+	\((\beta_1, ..., \beta_m)\) będzie bazą \(W\). Wtedy układ
+	\[
+	\{ \alpha_i \otimes \beta_j \}
+	\]
+	jest bazą przestrzeni \(V \otimes W\).
+\end{theorem}
+
+\begin{definition}
+	Definiujemy rząd tensora \(t\) jako minimalną liczbę, że istnieje układ tensorów
+	prostych którego kombinacja liniowa jest równa \(t\).
+\end{definition}
+\section{Iloczyn zewnętrzny}
+\begin{definition}
+    Przekształcenie \(n\)-liniowe \(f\) jest:
+    \begin{enumerate}
+        \item symetryczne, jeśli dla dowolnej permutacji \(\sigma\) jest
+        \[f(v_1, ..., v_n) = f(v_{\sigma(1)}, ..., v_{\sigma(n)});\]
+
+        \item antysymetryczne, jeśli dla dowolnej permutacji \(\sigma\) jest
+        \[(f(v_1, ..., v_n) = \text{sgn}(\sigma)f(v_{\sigma(1)}, ..., v_{\sigma(n)}).\]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Niech \(V_1, ..., V_n = V\) to przestrzeń liniowa. Wówczas \(n\)-krotny iloczyn tensorowy
+    \(V_1 \otimes ... \otimes V_n =: V^{\otimes_n}\) nazywamy \(n\)-tą potęgą
+    tensorową przestrzeni \(V\).
+\end{definition}
+
+\begin{definition}
+    Niech \(n \geq 1\) oraz \(V\) będzie przestrzenią liniową nad \(K\).
+    Rozważmy następujące podprzestrzenie \(V^{\otimes_n}\):
+    \begin{enumerate}
+        \item \(N_s = \text{lin}\{v_1 \otimes ... \otimes v_n - v_{\sigma(1)}
+        \otimes ... \otimes v_{\sigma(n)}\ :\ v_1, ..., v_n \in V \ \land \sigma \in S_n \}\);
+        \item \(N_a = \text{lin}\{v_1 \otimes ... \otimes v_n\ :\ v_1, ..., v_n \in V \land v_i = v_j, i \not = j\}\)
+    \end{enumerate}
+    Zdefiniujmy \(\sum^{n}V = V^{\otimes} / N_s\) oraz \(\bigwedge^{n}V = V^{\otimes_n} / N_a\).
+    Również niech
+    \[
+        \tau_s = p_s \circ \tau,\ \tau_a = p_a \circ \tau
+    \]
+    gdzie \(\tau: V^n \to V^{\otimes_n}\) to kanoniczne przekształcenie \(n\)-liniowe,
+    a \(p_s: V^{\otimes_n} \to \sum^{n}V\) oraz \(p_a: V^{\otimes_n} \to \bigwedge^{n}V\)
+    to naturalne rzutowania na przestrzenie ilorazowe. Wówczas:
+    \begin{enumerate}
+        \item przestrzeń \(\sum^{n}V\) nazywamy \(n\)-tą potęgą symetryczną \(V\);
+        \item przestrzeń \(\bigwedge^{n}V\) nazywamy \(n\)-tą potęgą zewnętrzną.
+        Elementy tej przestrzeni nazywamy czasem \(n\)-wektorami lub multiwektorami, a
+        elementy \(\wedge^{n}V^{*}\) nazywamy \(n\)-formami lub \(n\)-kowektorami.
+    \end{enumerate}
+    Obraz \((v_1, ..., v_n)\) w \(p_a\) oznaczamy przez \(v_1 \wedge ... \wedge v_n\)
+    i nazywamy \(n\)-wektorem (multiwektorem) prostym.
+\end{definition}
+
+
 \section{Iloczyn skalarny i ortogonalność}
 \begin{definition}
     Formę dwuliniową \(\langle, \rangle\) nazywamy iloczynem skalarnym jeżeli:
@@ -62,8 +175,8 @@ nie ma czegoś lub jest słabo opisane to proszę nie krępować się poprawić.
         \norm{\alpha} \cdot \norm{\beta}\);
         \item Nierówność trójkąta --- \(\norm{\alpha + \beta} \leq \norm{\alpha}
         + \norm{\beta}\);
-        \item Nierówność Pitagorasa --- \(\ip{\alpha}{\beta} = 0 \Longrightarrow
-        \norm{\alpha + \beta} \leq \norm{\alpha} + \norm{\beta}\).
+        \item Twierdzenie Pitagorasa --- \(\ip{\alpha}{\beta} = 0 \Longrightarrow
+        \norm{\alpha + \beta}^2 = \norm{\alpha}^2 + \norm{\beta}^2\).
     \end{enumerate}
 \end{lemma}
 
@@ -105,7 +218,8 @@ nie ma czegoś lub jest słabo opisane to proszę nie krępować się poprawić.
     Prawdziwy jest następujący rozkład, gdzie pierwszy wyraz należy do
     \(\text{lin}(\alpha)\), a drugi do \(\text{lin}(\alpha)^{\perp}\):
     \[
-    \beta = \frac{\ip{\alpha}{\beta}}{\ip{\alpha}{\alpha}}\alpha + \left( \beta - \frac{\ip{\alpha}{\beta}}{\ip{\alpha}{\alpha} \alpha} \right)
+    \beta = \frac{\ip{\alpha}{\beta}}{\ip{\alpha}{\alpha}}\alpha + \left( \beta
+    - \frac{\ip{\alpha}{\beta}}{\ip{\alpha}{\alpha} \alpha} \right)
     \]
 \end{remark}
 
@@ -160,6 +274,92 @@ nie ma czegoś lub jest słabo opisane to proszę nie krępować się poprawić.
         \(\text{M}(\phi)_{\mathcal{A}}^{\mathcal{A}}\) jest górnotrójkątna.
     \end{enumerate}
 \end{remark}
+
+\begin{definition}
+    Dla \(\)Wektor \(\alpha\) nazwiemy
+\end{definition}
+
+\section{Przekształcenia samosprzężone i twierdzenie spektralne}
+
+Niech \(V, \ip{}{}\) to przestrzeń euklidesowa wymiaru \(n\). Każdemu wektorowi
+\(v \in V\) przyporządkowujemy funkcjonał \(f_v \in V^{*}\) wzorem:
+\[
+    f_{v}(u) = \ip{u}{v},\ u \in V.
+\]
+Przyporządkowanie \(\Psi: V \to V^{*}\) zadane wzorem \(\Psi(v) = f_v\) jest
+izomorfizmem przestrzeni liniowych. Jeśli \(\mathcal{A} = (\alpha_1, ..., \alpha_n)\)
+jest bazą ortonormalną \(V\) to \((f_{v_1}, ..., f_{v_n})\) jest dualną do
+\(\mathcal{A}\) bazą \(V^{*}\).
+TODO
+
+\section{Iloczyn hermitowski}
+
+\begin{definition}
+    Niech \(V\) to przestrzeń liniowa nad \(\C\). Funkcję \(\hip{}{} : V \times V \to \C\)
+	nazywamy iloczynem hermitowskim, gdy dla każdych \(\alpha, \beta, \gamma, \delta \in V\)
+	i \(a, b, c, d\) zachodzą:
+	\begin{enumerate}
+		\item \(\hip{a\alpha + b \beta}{\gamma} = a\hip{\alpha}{\gamma} + b\hip{\beta}{\gamma}\)
+		\item \(\hip{\gamma}{a\alpha + b \beta} = \overline{a}\hip{\gamma}{\alpha} + \overline{b}\hip{\gamma}{\beta}\)
+		\item \(\hip{\alpha}{\beta} = \overline{\hip{\beta}{\alpha}}\)
+		\item \(\alpha \not = 0 \Rightarrow \hip{\alpha}{\alpha} \in \R_{+}\)
+    \end{enumerate}
+    Jeśli funkcja spełnia dwa pierwsze warunki, nazywamy ją formą półtoraliniową.
+    Parę \((V, \hip{}{} )\), gdzie \(V\) jest skończenie wymiarowną przestrzenią liniową nac \(\C\)
+    oraz \(\hip{}{} \) jest iloczynem hermitowskim na \(V\) nazywamy przestrzenią unitarną.
+\end{definition}
+
+\begin{remark}
+	Dla iloczynu hermitowskiego działają również macierze form dwuliniowych.
+\end{remark}
+
+\begin{remark}
+	Definicje ortogonalności, normy i baz tak jak w iloczynie skalarnym.
+\end{remark}
+\begin{remark}
+	Jeśli \(\alpha, \beta \in V\) oraz \(\hip{\alpha}{\beta} = 0\) wtw. gdy
+	\(\hip{\beta}{\alpha} = 0\).
+\end{remark}
+
+\begin{remark}
+	Nierówności Schwarza, trójkąta i twierdzenie Pitagorasa działają również
+	w iloczynie hermitowskim.
+\end{remark}
+
+\begin{definition}
+	Niech \(A = [a_{i\,j}]\). Macierz \(A^{*}\) mającą w \(i\)-tym wierszu i \(j\)-tej
+	kolumnie wyraz \(\overline{a_{j\,i}}\) nazywamy sprzężeniem hermitowskim
+	macierzy \(A\). Jeśli macierz \(A\) spełnia warunek \(A^{*} = A\), to
+	mówimy, że \(A\) jest macierzą hermitowską.
+\end{definition}
+
+\begin{definition}
+	Endomorfizm \(\phi\) nazywamy samosprzężonym jeśli \(\phi = \phi^{*}\).
+\end{definition}
+
+\begin{definition}
+	Niech \((V_1, \hip{}{}_1), (V_2, \hip{}{}_2)\) to przestrzenie unitarne.
+	Wówczas:
+	\begin{enumerate}
+		\item Izomorfizm \(\phi: V_1 \to V_2\) nazwiemy przekształceniem unitarnym, jeżeli
+		zachowuje iloczyn hermitowski, czyli \(\hip{\alpha}{\beta}_1 = \hip{\phi(\alpha)}{\phi(beta)}_2\);
+
+		\item Macierz \(A\) nazwiemy unitarną jeśli \(M \cdot M^{*} = I_n\).
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Izomorfizm jest unitarny wtw. gdy zachowuje normę każdego wektora \(v \in V_1\).
+\end{remark}
+
+\begin{theorem}
+	Jeśli \(\phi \in \textnormal{End}(V)\) jest endomorfizmem unitarnym, to
+	każda wartość własna \(\lambda \in \C\) spełnia \(\abs{\lambda} = 1\).
+	Wektory własne \(\phi\) odpowiadające parami różnym wartościom własnym są
+	ortogonalne. Istnieje też baza złożona z wektorów własnych.
+\end{theorem}
+
+\section{SVD}
 
 
 \end{document}
